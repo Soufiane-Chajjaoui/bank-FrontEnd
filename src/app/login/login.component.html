@@ -1,0 +1,32 @@
+<div class="container-fluid">
+      <div class="row justify-content-around align-items-center min-vh-100 ">
+        <div class="col-3">
+          <div class="card" *ngIf="loginForm">
+            <div class="card-body">
+              <form [formGroup]="loginForm" (ngSubmit)="auth()">
+                <div class="my-1">
+                  <div class="mt-1">
+                    <label class="form-label">Username</label>
+                    <input class="form-control" formControlName="username" />
+                  </div>
+                  <div class="mt-1">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" formControlName="password" />
+                  </div>
+                  <div class="mt-5">
+                    <input class="btn btn-primary w-100" [disabled]="loginForm.invalid" type="submit" value="submit" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 pb-3">
+            <picture >
+              <source srcset="assets/images/BankIcon.png">
+              <img ngSrc="assets/images/BankIcon.png" class="img-fluid" alt="bankImage" height="400"
+                   width="400">
+            </picture>
+        </div>
+      </div>
+</div>

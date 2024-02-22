@@ -1,0 +1,36 @@
+<div class="container mt-3" >
+  <div *ngIf="newCustomerForm" >
+    <div class="d-flex justify-content-center">
+      <div class="card col-7">
+        <div class="card-header text-center" >
+          <h2 class="fw-semibold">New Customer</h2>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="newCustomerForm" (ngSubmit)="newCustomer()" >
+            <div class="mb-3">
+              <label class="form-label" >Name :</label>
+              <input class="form-control" formControlName="name" />
+              <span class="text-danger" *ngIf="newCustomerForm.controls['name'].touched
+                                                && newCustomerForm.controls['name'].errors
+                                                && newCustomerForm.controls['name'].errors!['required']">
+                Name is Required
+              </span>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" >Email :</label>
+              <input class="form-control" formControlName="email" />
+              <span class="text-danger" *ngIf="newCustomerForm.controls['email'].touched
+                                                && newCustomerForm.controls['email'].errors
+                                                && newCustomerForm.controls['email'].errors!['required']">
+                Email is Required
+              </span>
+            </div>
+             <button [disabled]="newCustomerForm.invalid" class="btn btn-outline-primary" type="submit" >
+              <i class="bi bi-save">save</i>
+             </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

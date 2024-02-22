@@ -1,0 +1,61 @@
+
+<div class="container mt-3">
+  <ng-container *ngIf="customers | async as listCustomers ; else failureOrLoading">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <div>Customers</div>
+          <div *ngIf="searchformGroup">
+            <form [formGroup]="searchformGroup" class="d-flex" (submit)="handleSearchCustomer()">
+              <input class="form-control" type="search" placeholder="Search" formControlName="keyword" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of listCustomers">
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.email}}</td>
+            <td class="text-center ">
+              <button class="btn btn-outline-danger mx-2" (click)="handleDeleteCustomer(c)" >
+                <i class="bi bi-trash"></i>
+              </button>
+              <button class="btn btn-outline-danger mx-2" (click)="navigateToAccounts(c)" >
+                <i class="bi bi-ticket-detailed"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </ng-container>
+  <ng-template #failureOrLoading>
+      <ng-container *ngIf="errorMessage; else loading">
+        <div class="text-danger">
+          {{errorMessage}}
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        Loading .....
+      </ng-template>
+  </ng-template>
+
+
+</div>

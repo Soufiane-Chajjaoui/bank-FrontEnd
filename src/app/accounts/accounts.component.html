@@ -1,0 +1,77 @@
+<div class="container" >
+  <div class="row mt-5">
+    <div class="col col-6">
+      <div class="card shadow-sm" *ngIf="searchForm">
+        <form [formGroup]="searchForm" (submit)="handleSearchAccount()">
+          <div class="input-group p-3">
+            <label class="input-group-text">AccountID</label>
+            <input class="form-control" formControlName="idAccount" />
+            <button type="submit"  class="btn btn-outline-primary">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </form>
+        <div class="mt-2" *ngIf="accountDetails">
+          <div class="p-2">
+            <h2 class="fw-semibold">Balance : {{accountDetails.balance | currency}}</h2>
+          </div>
+          <div class="p-1">
+            <table class="table table-hover" >
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Type</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let op of accountDetails?.accountOperationDTO">
+                <td>{{op.id}}</td>
+                <td class="text-end">{{op.amount | number : "2.2-2"}}</td>
+                <td>{{op.operationDate | date : "medium"}}</td>
+                <td>{{op.type}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="nav nav-pills">
+            <li *ngFor="let item of [].constructor(accountDetails.totalPages) ;let page = index ">
+              <a (click)="gotoPage(page)" [ngClass]="currentPage == page ? 'btn-info' : 'btn-outline-info'" class="btn m-1">{{page}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col col-6"  *ngIf="authService.user.roles.includes('ADMIN')">
+      <div class="card shadow-sm" *ngIf="operationForm" >
+        <div class="card-body">
+          <form [formGroup]="operationForm" (ngSubmit)="saveOperation()" class="my-2">
+            <ul class="nav nav-pills nav-fill">
+              <li class="nav-item" *ngFor="let tab of navigationTabs">
+                <a (click)="navigateToTab(tab)" [ngClass]="tab == currentTab ? 'active' : ''" class="nav-link rounded-0">{{ tab.nav }}</a>
+              </li>
+            </ul>
+            <div class="my-2">
+              <label class="form-label">Amount</label>
+              <input class="form-control" type="text" formControlName="amount" />
+            </div>
+            <div class="my-2" *ngIf="currentTab == navigationTabs[2]">
+              <label class="form-label">Destination Account</label>
+              <input class="form-control" type="text" formControlName="destination" />
+            </div>
+            <div class="my-2">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" type="text" formControlName="description" rows="3" ></textarea>
+            </div>
+            <div class="mt-4">
+              <input class="btn btn-primary w-100" [disabled]="operationForm.invalid" value="Submit" type="submit" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

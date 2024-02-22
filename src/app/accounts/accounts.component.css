@@ -1,0 +1,21 @@
+.card {
+  font-size: 16px;
+  margin-bottom: 1px;
+  border-radius:  0.9rem;
+  box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.1);
+}
+.card-header {
+  background-color: #dadfe5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-body {
+  padding: 20px;
+}
+.form-control:focus {
+  border: 2px solid blue;
+  border-radius: 9px;
+  box-shadow: 0px 12px 14px -49px rgba(0,0,0,0.1);
+}
+
+
+
