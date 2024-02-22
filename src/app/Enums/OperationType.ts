@@ -1,0 +1,3 @@
+enum OperationType {
+  CREDIT , DEBIT
+}
